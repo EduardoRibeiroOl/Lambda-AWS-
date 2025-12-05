@@ -1,0 +1,43 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: Lambda TS exemplo
+
+Globals:
+  Function:
+    Timeout: 10     # evita timeout de 3s
+    Environment:
+      Variables:
+        DYNAMO_ENDPOINT: http://host.docker.internal:4566
+        AWS_REGION: us-east-1
+
+Resources:
+  UserFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: dist/main.handler
+      Runtime: nodejs20.x
+      Events:
+        ApiGatewayEvent:
+          Type: Api
+          Properties:
+            Path: /user
+            Method: POST
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: "DynamoTable"
+
+  MyTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: "DynamoTable"
+      AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: S
+        - AttributeName: type
+          AttributeType: S
+      KeySchema:
+        - AttributeName: id
+          KeyType: HASH
+        - AttributeName: type
+          KeyType: RANGE
+      BillingMode: PAY_PER_REQUEST

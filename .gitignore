@@ -1,0 +1,83 @@
+# 📦 Dependências e Módulos
+############################
+# ⚙️ AWS SAM Build e Artefatos de Deploy
+########################################
+
+localstack
+
+# O diretório de build principal gerado por 'sam build'
+.aws-sam/
+
+# Arquivos de log de teste local
+sam-local-*.log
+
+# Pasta de ambiente de cache do SAM (opcional, dependendo da versão)
+.cache/
+
+# Diretório de módulos de terceiros (gerados pelo npm/yarn/pnpm)
+node_modules
+
+# Logs de debug do npm
+npm-debug.log*
+.npm
+
+# Logs do Yarn
+yarn-error.log
+.yarn-integrity
+
+# Logs do pnpm
+pnpm-debug.log*
+.pnpm-store
+
+# ⚙️ Build e Arquivos Gerados (TypeScript)
+########################################
+
+# Diretório de saída do TypeScript (o JS compilado)
+# Por exemplo, se o seu 'tsconfig.json' usa 'outDir': './dist'
+/dist
+/build
+/out
+
+# Arquivos de mapeamento de código-fonte (Source Maps)
+# Embora úteis para debug, não devem ir para o Git
+*.js.map
+
+# Arquivos .js gerados pelo TypeScript
+# Se você compila para o diretório raiz, é importante ignorar o JS
+# (Se você usa /dist, as linhas abaixo são opcionais)
+*.js
+!/dist/**/*.js # Exemplo: NÃO ignore os arquivos .js DENTRO do /dist, se você commitá-los
+
+# 🔑 Dados de Configuração Local e Variáveis de Ambiente
+#########################################################
+
+# Arquivos de variáveis de ambiente que contêm segredos
+.env
+.env.*
+.envrc
+
+# Arquivos de chave/token de serviço que não devem ser versionados
+*.key
+*.pem
+*.pfx
+
+# 💻 Arquivos Específicos do Sistema Operacional e Editor
+###########################################################
+
+# MacOS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+
+# VSCode (ou outros editores populares)
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history
+
+# JetBrains IDEs (WebStorm, IntelliJ)
+.idea/
