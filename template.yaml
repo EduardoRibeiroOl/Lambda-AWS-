@@ -25,7 +25,37 @@ Resources:
       Policies:
         - DynamoDBCrudPolicy:
             TableName: "DynamoTable"
-
+            
+  CreateUserFunction:
+      Type: AWS::Serverless::Function
+      Properties:
+        Handler: dist/create.handler
+        Runtime: nodejs20.x
+        Events:
+          ApiGatewayEvent:
+            Type: Api
+            Properties:
+              Path: /createuser
+              Method: POST
+        Policies:
+          - DynamoDBCrudPolicy:
+              TableName: "DynamoTable"
+    
+  GetUserFunction:
+      Type: AWS::Serverless::Function
+      Properties:
+        Handler: dist/get.handler
+        Runtime: nodejs20.x
+        Events:
+          ApiGatewayEvent:
+            Type: Api
+            Properties:
+              Path: /getuser
+              Method: GET
+        Policies:
+          - DynamoDBCrudPolicy:
+              TableName: "DynamoTable"
+              
   MyTable:
     Type: AWS::DynamoDB::Table
     Properties:
